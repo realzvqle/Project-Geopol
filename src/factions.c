@@ -2,7 +2,7 @@
 #include "exheaders/raylib.h"
 #include "player.h"
 #include "tools.h"
-# 
+
 char* namechoice[] = {"Consolan Republic", "Kingdom of Najidert", "Sovienian Union", 
                         "Murri Revolutionary Forces", "Murican Empire", "Brotian State"};
 char* namechoiceshort[] = {"Consola", "Najidert", "Sovienia", 

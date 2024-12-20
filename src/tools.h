@@ -14,4 +14,7 @@ void GpFollow(float targetx, float targety, float* curx, float* cury, float spee
 void GpRunAway(float targetx, float targety, float* curx, float* cury, float speed);
 void GpClose();
 float GpGetDistance(float first, float second);
+bool GpFollowStatus(float targetx, float targety, float* curx, float* cury, float speed);
+float GpGetMouseX();
+float GpGetMouseY();
 #endif

@@ -6,6 +6,7 @@
 
 
 #include "tools.h"
+#include "weapons.h"
 
 #define PLAYER_SIZE 25
 
@@ -14,6 +15,8 @@ typedef struct _PLAYER_DATA {
     float y;
     char* name;
     char* nameshort;
+    bool schedulefire;
+    WEAPON weapon;
 } PLAYER_DATA;
 
 void SetupPlayer();

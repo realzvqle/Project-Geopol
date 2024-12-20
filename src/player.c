@@ -1,5 +1,6 @@
 #include "player.h"
 #include "exheaders/raylib.h"
+#include "weapons.h"
 
 
 
@@ -20,6 +21,12 @@ static void DrawPlayer(){
 
 void PlayerLoop(){
     DrawPlayer();
+    if(player_data.schedulefire == true){
+        bool result = FireWeapons(&player_data.weapon, player_data.x, player_data.y, GpGetMouseX(), GpGetMouseY(), BLUE);
+        if(result == true){
+            player_data.schedulefire = false;
+        }
+    }
     if (IsKeyDown(KEY_W)) {
         player_data.y -= 600.0 * GetFrameTime();
     }
@@ -31,6 +38,9 @@ void PlayerLoop(){
     }
     if (IsKeyDown(KEY_D)) {
         player_data.x += 600.0 * GetFrameTime();
+    }
+    if(IsKeyPressed(KEY_SPACE)){
+        player_data.schedulefire = true;
     }
     camera.target.x = player_data.x - GetScreenWidth() / 2.0;
     camera.target.y = player_data.y - GetScreenHeight() / 2.0;

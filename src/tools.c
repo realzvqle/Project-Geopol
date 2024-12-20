@@ -1,10 +1,12 @@
 #include "tools.h"
+#include "exheaders/raylib.h"
 #include <stdbool.h>
 #include <stdio.h>
 #include <math.h>
 
 static Font font;
 
+extern Camera2D camera;
 
 void GpSetup(){
     font = LoadFontEx("resources/fonts/static/PixelifySans-Regular.ttf", 200, NULL, 0);
@@ -38,6 +40,21 @@ void GpFollow(float targetx, float targety, float* curx, float* cury, float spee
     }
 }
 
+bool GpFollowStatus(float targetx, float targety, float* curx, float* cury, float speed){
+    static bool finished = false;
+    if (targetx < *curx) {
+        *curx -= speed * GetFrameTime();
+    } else if (targetx > *curx) {
+        *curx += speed * GetFrameTime();
+    }
+    if (targety < *cury) {
+        *cury -= speed * GetFrameTime();
+    } else if (targety > *cury) {
+        *cury += speed * GetFrameTime();
+    }
+    if(GpGetDistance(targetx, *curx) <= 30 && GpGetDistance(targety, *cury) <= 30) return true;
+    else return false;
+}
 void GpRunAway(float targetx, float targety, float* curx, float* cury, float speed){
     if (targetx > *curx) {
         *curx -= speed * GetFrameTime();
@@ -53,4 +70,18 @@ void GpRunAway(float targetx, float targety, float* curx, float* cury, float spe
 
 float GpGetDistance(float first, float second){
     return fabsf(first - second);
+}
+
+
+
+float GpGetMouseX(){
+    Vector2 mouse = {GetMouseX(), GetMouseY()};
+    Vector2 mousepos = GetScreenToWorld2D(mouse, camera);
+    return mousepos.x;
+}
+
+float GpGetMouseY(){
+    Vector2 mouse = {GetMouseX(), GetMouseY()};
+    Vector2 mousepos = GetScreenToWorld2D(mouse, camera);
+    return mousepos.y;
 }
