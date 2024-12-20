@@ -16,10 +16,13 @@ void SetupPlayer(){
 }
 
 static void DrawPlayer(){
+    GpDrawText(player_data.nameshort, player_data.x, player_data.y - 60, 30, BLUE);
+
     DrawCircle(player_data.x, player_data.y, PLAYER_SIZE, BLUE);
 }
 
 void PlayerLoop(){
+
     DrawPlayer();
     if(player_data.schedulefire == true){
         bool result = FireWeapons(&player_data.weapon, player_data.x, player_data.y, GpGetMouseX(), GpGetMouseY(), BLUE);
