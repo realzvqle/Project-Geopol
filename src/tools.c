@@ -85,3 +85,16 @@ float GpGetMouseY(){
     Vector2 mousepos = GetScreenToWorld2D(mouse, camera);
     return mousepos.y;
 }
+float GpGetVersion(){
+    return 0.0f;
+}
+
+void GpDrawVersion(float posx, float posy, float size){
+    char buffer[512];
+    sprintf(buffer, "Version %0.1f\nBuilt On %s at %s", GpGetVersion(), __DATE__, __TIME__);
+    GpDrawText(buffer, posx, posy, size, GOLD);
+}
+
+Font GpGetFont(){
+    return font;
+}

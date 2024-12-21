@@ -5,6 +5,7 @@
 
 
 
+#include "factions.h"
 #include "tools.h"
 #include "weapons.h"
 
@@ -16,10 +17,15 @@ typedef struct _PLAYER_DATA {
     char* name;
     char* nameshort;
     bool schedulefire;
+    int health;
+    bool canshoot;
+    int targetnpcindex;
+    int targetfacindex;
     WEAPON weapon;
 } PLAYER_DATA;
 
 void SetupPlayer();
 void SetupCamera(Camera2D* camera);
 void PlayerLoop();
+void PlayerNPCInteractions(NPC* npc, FACTIONS* fac, int npcindex, int facindex);
 #endif

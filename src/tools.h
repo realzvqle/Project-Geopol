@@ -17,4 +17,7 @@ float GpGetDistance(float first, float second);
 bool GpFollowStatus(float targetx, float targety, float* curx, float* cury, float speed);
 float GpGetMouseX();
 float GpGetMouseY();
+void GpDrawVersion(float posx, float posy, float size);
+float GpGetVersion();
+Font GpGetFont();
 #endif

@@ -14,7 +14,7 @@ bool FireWeapons(WEAPON* weapon, float startx, float starty, float targetx, floa
         weapon->init = true;
     }
     DrawRectangle(weapon->x, weapon->y, 20, 20, color);
-    bool result = GpFollowStatus(targetx, targety, &weapon->x, &weapon->y, 400);
+    bool result = GpFollowStatus(targetx, targety, &weapon->x, &weapon->y, 900);
     if(result == true){
         weapon->init = false;
         return true;
