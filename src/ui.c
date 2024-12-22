@@ -30,7 +30,7 @@ void RenderMainMenu(){
     ClearBackground(BLACK);
     GpDrawText("Project Geopol", 10, GetScreenHeight() / 2.0, 60, GOLD);
     // GpDrawText("Press Space to Start", 10, GetScreenHeight() / 2.0 + 90, 30, RED);
-    ButtonState button = DrawButton("Start", 10, GetScreenHeight() / 2.0 + 90, 200, 50, LIGHTGRAY, RED, GRAY, NULL);
+    ButtonState button = DrawButton("Start", 10, GetScreenHeight() / 2.0 + 90, 200, 50, LIGHTGRAY, RED, GRAY, (int)NULL);
     if(button == BUTTON_CLICK_LEFT){
         scene = 1;
     }
@@ -39,7 +39,7 @@ void RenderMainMenu(){
 void RenderLooseMenu(){
     ClearBackground(BLACK);
     GpDrawText("YOU LOST", 10, GetScreenHeight() / 2.0, 60, RED);
-    ButtonState button = DrawButton("Restart", 10, GetScreenHeight() / 2.0 + 90, 400, 50, LIGHTGRAY, RED, GRAY, NULL);
+    ButtonState button = DrawButton("Restart", 10, GetScreenHeight() / 2.0 + 90, 400, 50, LIGHTGRAY, RED, GRAY, (int)NULL);
     if(button == BUTTON_CLICK_LEFT){
         init = false;
         scene = 1;
