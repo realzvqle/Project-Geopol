@@ -2,7 +2,6 @@
 #include "exheaders/raylib.h"
 #include "npc.h"
 #include "player.h"
-#include "tools.h"
 #include <stdio.h>
 
 char* namechoice[] = {"Consolan Republic", "Kingdom of Najidert", "Sovienian Union", 
