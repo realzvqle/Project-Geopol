@@ -1,4 +1,5 @@
 #include "ui.h"
+#include "exheaders/raylib.h"
 #include "player.h"
 #include "tools.h"
 #include <stdio.h>
@@ -6,6 +7,9 @@
 
 extern PLAYER_DATA player_data;
 extern FACTIONS faction[7];
+extern int scene;
+extern bool init;
+extern Camera2D camera;
 
 void RenderGamePlayerUI(){
     GpDrawFPS(10, 10);
@@ -15,6 +19,31 @@ void RenderGamePlayerUI(){
     GpDrawText(buffer, GetScreenWidth() - 150, 10, 25, PINK);
     sprintf(buffer, "Money: %d", faction[0].money);
     GpDrawText(buffer, GetScreenWidth() - 150, 30, 25, PINK);
+    // if(IsKeyPressed(KEY_F)){
+    //     if(!IsWindowFullscreen()) ToggleFullscreen();
+    //     else MinimizeWindow();
+        
+    // }
+}
+
+void RenderMainMenu(){
+    ClearBackground(BLACK);
+    GpDrawText("Project Geopol", 10, GetScreenHeight() / 2.0, 60, GOLD);
+    // GpDrawText("Press Space to Start", 10, GetScreenHeight() / 2.0 + 90, 30, RED);
+    ButtonState button = DrawButton("Start", 10, GetScreenHeight() / 2.0 + 90, 200, 50, LIGHTGRAY, RED, GRAY, NULL);
+    if(button == BUTTON_CLICK_LEFT){
+        scene = 1;
+    }
+}
+
+void RenderLooseMenu(){
+    ClearBackground(BLACK);
+    GpDrawText("YOU LOST", 10, GetScreenHeight() / 2.0, 60, RED);
+    ButtonState button = DrawButton("Restart", 10, GetScreenHeight() / 2.0 + 90, 400, 50, LIGHTGRAY, RED, GRAY, NULL);
+    if(button == BUTTON_CLICK_LEFT){
+        init = false;
+        scene = 1;
+    }
 }
 
 ButtonState DrawButton(const char* text, int x, int y, int sizeX, int sizeY, Color baseColor, Color textColor, Color hoverColor, int textSize) {

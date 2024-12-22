@@ -47,7 +47,10 @@ void PlayerLoop(){
             if(faction[player_data.targetfacindex].npc[player_data.targetnpcindex].health <= 0){
                 if(faction[player_data.targetfacindex].isPlayer != true){
                     faction[player_data.targetfacindex].hostile = true;
-                    faction[0].money += 120;
+                    if(player_data.targetfacindex == 1){
+                        faction[0].money += 120;
+                        printf("You've Been Rewarded for Killing a Bandit, +$120\n");
+                    }
                 }
                 player_data.canshoot = false;
             }
@@ -68,7 +71,11 @@ void PlayerLoop(){
     }
     if(IsKeyPressed(KEY_SPACE)){
         if(player_data.canshoot == true){
-            player_data.schedulefire = true;
+            if(GpGetDistance(player_data.x, faction[player_data.targetfacindex].npc[player_data.targetnpcindex].x) < 400 &&
+               GpGetDistance(player_data.y, faction[player_data.targetfacindex].npc[player_data.targetnpcindex].y) < 400) {
+                player_data.schedulefire = true;
+            }
+            
         }
     }
     if(IsKeyPressed(KEY_R)){

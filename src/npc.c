@@ -48,7 +48,12 @@ void NPCLogic(NPC* npc, FACTIONS* fac, int i, int j){
                 //printf("Range!\n");
                 npc->canshoot = true;
             }
-            else GpFollow(player_data.x, player_data.y, &npc->x, &npc->y, 300 + npc->speeddebuf);
+
+            else{
+                if(player_data.schedulefire == true) GpRunAway(player_data.x, player_data.y, &npc->x, &npc->y, 300 + npc->speeddebuf);
+                else GpFollow(player_data.x, player_data.y, &npc->x, &npc->y, 300 + npc->speeddebuf);
+
+            } 
             npc->canshoot = true;
         }
         else npc->canshoot = false;

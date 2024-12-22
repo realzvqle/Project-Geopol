@@ -16,6 +16,8 @@ typedef enum ButtonState{
 } ButtonState;
 
 void RenderGamePlayerUI();
+void RenderMainMenu();
+void RenderLooseMenu();
 ButtonState DrawButton(const char* text, int x, int y, int sizeX, int sizeY, Color baseColor, Color textColor, Color hoverColor, int textSize);
 
 #endif
