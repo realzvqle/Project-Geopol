@@ -19,6 +19,7 @@ typedef struct _PLAYER_DATA {
     bool schedulefire;
     int health;
     bool canshoot;
+    bool targetselect;
     int targetnpcindex;
     int targetfacindex;
     WEAPON weapon;

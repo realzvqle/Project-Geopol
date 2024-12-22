@@ -70,6 +70,7 @@ void PlayerLoop(){
         player_data.x += 600.0 * GetFrameTime();
     }
     if(IsKeyPressed(KEY_SPACE)){
+        if(player_data.targetselect != true) return;
         if(player_data.canshoot == true){
             if(GpGetDistance(player_data.x, faction[player_data.targetfacindex].npc[player_data.targetnpcindex].x) < 400 &&
                GpGetDistance(player_data.y, faction[player_data.targetfacindex].npc[player_data.targetnpcindex].y) < 400) {
@@ -84,6 +85,13 @@ void PlayerLoop(){
             player_data.health += 50;
         }
     }
+    if(IsKeyPressed(KEY_P)){
+        camera.zoom = 1;
+    }
+    if(IsKeyDown(KEY_UP)) camera.zoom+=0.005;
+    if(IsKeyDown(KEY_DOWN)) camera.zoom-=0.005;
+    //camera.zoom = camera.zoom + GetMouseWheelMove(); 
+    //printf("%f\n", GetMouseWheelMove());
     camera.target.x = player_data.x - GetScreenWidth() / 2.0;
     camera.target.y = player_data.y - GetScreenHeight() / 2.0;
 }
@@ -93,6 +101,7 @@ void PlayerNPCInteractions(NPC* npc, FACTIONS* fac, int npcindex, int facindex){
         if(IsMouseButtonDown(MOUSE_BUTTON_LEFT)){
             player_data.targetnpcindex = npcindex;
             player_data.targetfacindex = facindex;
+            player_data.targetselect = true;
             player_data.canshoot = true;
         }   
     }

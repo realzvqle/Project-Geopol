@@ -11,11 +11,13 @@ extern PLAYER_DATA player_data;
 
 
 void SetupNPC(NPC* npc, Color color){
-    npc->x = (float)GetRandomValue(0, 5000);
-    npc->y = (float)GetRandomValue(0, 5000);
+    npc->x = (float)GetRandomValue(0, 10000);
+    npc->y = (float)GetRandomValue(0, 10000);
     npc->speeddebuf = GetRandomValue(100, 200);
     npc->color = color;
     npc->health = 2;
+    npc->isAlive = true;
+    player_data.targetselect = false;
 }
 
 void NPCLogic(NPC* npc, FACTIONS* fac, int i, int j){
@@ -57,6 +59,7 @@ void NPCLogic(NPC* npc, FACTIONS* fac, int i, int j){
         }
         else npc->canshoot = false;
     }
+    if(player_data.targetselect != true) return;
     if(i == player_data.targetfacindex){
         if(j == player_data.targetnpcindex){
             DrawRectangleLines(npc->x - (NPC_SIZE + 10), 
