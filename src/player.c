@@ -4,6 +4,7 @@
 #include "npc.h"
 #include "tools.h"
 #include "weapons.h"
+#include <stdbool.h>
 #include <stdio.h>
 
 
@@ -18,7 +19,8 @@ void SetupPlayer(){
     player_data.y = GetScreenHeight() / 2.0;
     player_data.name = "Morkovian Republic";
     player_data.nameshort = "Morkovia";
-    player_data.health = 300;
+    player_data.health = 15;
+    player_data.npcindex = 1;
 }
 
 static void DrawPlayer(){
@@ -80,10 +82,18 @@ void PlayerLoop(){
         }
     }
     if(IsKeyPressed(KEY_R)){
-        if((faction[0].money - 50) > 0){
+        if((faction[0].money - 50) > 0 && player_data.health < 15){
             faction[0].money -= 50;
-            player_data.health += 50;
+            player_data.health += 1;
         }
+    }
+    if(IsKeyPressed(KEY_M)){
+        SetupNPC(&faction[0].npc[player_data.npcindex], BLUE);
+        //faction[0].npc[player_data.npcindex].isAlive = true;
+        player_data.npcindex++;
+        player_data.x = faction[0].npc[player_data.npcindex].x;
+        player_data.y = faction[0].npc[player_data.npcindex].y;
+        printf("made in, index = %d\n", player_data.npcindex);
     }
     if(IsKeyPressed(KEY_P)){
         camera.zoom = 1;

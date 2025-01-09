@@ -6,13 +6,14 @@
 #include "weapons.h"
 #include <math.h>
 #include <stdint.h>
+#include <stdio.h>
 
 extern PLAYER_DATA player_data;
 
 
 void SetupNPC(NPC* npc, Color color){
-    npc->x = (float)GetRandomValue(0, 10000);
-    npc->y = (float)GetRandomValue(0, 10000);
+    npc->x = (float)GetRandomValue(0, 2000);
+    npc->y = (float)GetRandomValue(0, 2000);
     npc->speeddebuf = GetRandomValue(100, 200);
     npc->color = color;
     npc->health = 2;
@@ -20,29 +21,34 @@ void SetupNPC(NPC* npc, Color color){
     player_data.targetselect = false;
 }
 
+
+
 void NPCLogic(NPC* npc, FACTIONS* fac, int i, int j){
     if(npc->health <= 0){
         npc->isAlive = false;
         fac->lostaplayer = true;
     }
     if(npc->canshoot == true){
-        // if(npc->waitschedule == true){
-        //     if(fabs(npc->prevtime - GetTime()) <= 2.2){
-        //         npc->waitschedule = false;
-        //     }
-        //     //printf("%f\n", fabs(npc->prevtime - GetTime()));
-        //     return;
-        // }
+        if(npc->waitschedule == true){
+            if(fabs(npc->prevtime - GetTime()) >= 0.3){
+                npc->waitschedule = false;
+            }
+            //printf("%f\n", fabs(npc->prevtime - GetTime()));
+            goto SKIPWEAPONS;
+        }
+        //printf("Faoled\n");
         bool result = FireWeapons(&npc->weapon, npc->x, npc->y, player_data.x, player_data.y, GetRGB(fac));
         if(result == true){
-            // npc->waitschedule = true;
-            // npc->prevtime = GetTime();
+            npc->waitschedule = true;
+            npc->prevtime = GetTime();
             player_data.health--;
             //printf("player health: %d\n", player_data.health);
         }
     }
+SKIPWEAPONS:
     DrawCircle(npc->x, npc->y, NPC_SIZE, GetRGB(fac));
     GpDrawText(fac->nameshort, npc->x, npc->y - 60, 30, GetRGB(fac));
+    
     if(fac->hostile == true){
         if(GpGetDistance(npc->x, player_data.x) < 400 && GpGetDistance(npc->y, player_data.y) < 400){
             if(GpGetDistance(npc->x, player_data.x) <= 40 && GpGetDistance(npc->y, player_data.y) <= 40){
@@ -69,4 +75,5 @@ void NPCLogic(NPC* npc, FACTIONS* fac, int i, int j){
                                GetRGB(fac));
         }
     }
+    
 }

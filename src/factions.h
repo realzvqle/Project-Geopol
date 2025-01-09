@@ -23,5 +23,6 @@ typedef struct _FACTIONS{
 void SetupFactions();
 void RenderFactionNPCs();
 Color GetRGB(FACTIONS* fac);
+int GetFreeNPCSport(FACTIONS* fac);
 
 #endif

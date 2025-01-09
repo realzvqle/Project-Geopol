@@ -22,6 +22,7 @@ typedef struct _PLAYER_DATA {
     bool targetselect;
     int targetnpcindex;
     int targetfacindex;
+    uint16_t npcindex;
     WEAPON weapon;
 } PLAYER_DATA;
 
