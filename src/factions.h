@@ -11,7 +11,7 @@
 typedef struct _FACTIONS{
     char* name;
     char* nameshort;
-    int16_t moral_stance;
+    int moral_stance;
     bool hostile;
     bool isPlayer;
     int money;

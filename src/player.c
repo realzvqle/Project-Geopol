@@ -43,6 +43,9 @@ void PlayerLoop(){
             if(faction[player_data.targetfacindex].isPlayer != true){
                 if(faction[player_data.targetfacindex].hostile == false){
                     faction[player_data.targetfacindex].moral_stance-=50;
+                    if(faction[player_data.targetfacindex].moral_stance <= 30){
+                        faction[player_data.targetfacindex].hostile = true;
+                    }
                 }
             }  
             faction[player_data.targetfacindex].npc[player_data.targetnpcindex].health--;

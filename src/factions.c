@@ -21,6 +21,9 @@ Color GetRGB(FACTIONS* fac){
     } else if(fac->isPlayer == true){
         return BLUE;
     } else {
+        if(fac->moral_stance <= 30){
+            return RED;
+        }
         uint8_t red = 255 - fac->moral_stance;
         uint8_t green = fac->moral_stance; 
         uint8_t blue = 0;

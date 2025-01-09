@@ -1,16 +1,26 @@
 #include "ui.h"
 #include "exheaders/raylib.h"
-#include "npc.h"
 #include "player.h"
 #include "tools.h"
+#include <limits.h>
 #include <stdio.h>
 
+static char* splashmessage[20] = {
+    "Written in C!", "Windows is da Best!", "Using Raylib!", "Twitter > X", "Annex Canada!",
+    "Don't Annex Greenland!", "Sheikh Donaldaus binu Al-Troomp", "visit OSDEV.ORG!", "the Loonix Kernel shall Die",
+    "NtDisplayString(PUNICODE_STRING String);", "We love the NT Kernel!", "NTTTTTTTTTT", "Fireship is a nice youtuber",
+    "x.com/realzvqle", "I will NOT RKD for him!", "static char* splashmessage[20]", "WINDOWWWWS", "I feel scizo typing this",
+    "Included Header stdio.h not found", "VSCODEEEEE"
+};
 
 extern PLAYER_DATA player_data;
 extern FACTIONS faction[7];
 extern int scene;
 extern bool init;
 extern Camera2D camera;
+
+static bool menuinit = false;
+static char* splash;
 
 void RenderGamePlayerUI(){
     GpDrawFPS(10, 10);
@@ -28,8 +38,20 @@ void RenderGamePlayerUI(){
 }
 
 void RenderMainMenu(){
+    if(menuinit == false){
+        int cmdSize = sizeof(splashmessage)/sizeof(splashmessage[0]);
+        splash = splashmessage[GetRandomValue(0, cmdSize)];
+        menuinit = true;
+    }
+    static unsigned char i = 0;
     ClearBackground(BLACK);
+    Color color = {i, i, i, 255};
+    i+=1;
+    if(i == UCHAR_MAX){
+        i = 0;
+    }
     GpDrawText("Project Geopol", 10, GetScreenHeight() / 2.0, 60, GOLD);
+    GpDrawText(splash, 10, GetScreenHeight() / 2.0 + 200, 40, color);
     // GpDrawText("Press Space to Start", 10, GetScreenHeight() / 2.0 + 90, 30, RED);
     ButtonState button = DrawButton("Start", 10, GetScreenHeight() / 2.0 + 90, 200, 50, LIGHTGRAY, RED, GRAY, (int)NULL);
     if(button == BUTTON_CLICK_LEFT){
@@ -40,6 +62,7 @@ void RenderMainMenu(){
 void RenderLooseMenu(){
     ClearBackground(BLACK);
     GpDrawText("YOU LOST", 10, GetScreenHeight() / 2.0, 60, RED);
+    
     ButtonState button = DrawButton("Restart", 10, GetScreenHeight() / 2.0 + 90, 400, 50, LIGHTGRAY, RED, GRAY, (int)NULL);
     if(button == BUTTON_CLICK_LEFT){
         

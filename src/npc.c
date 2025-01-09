@@ -6,7 +6,6 @@
 #include "weapons.h"
 #include <math.h>
 #include <stdint.h>
-#include <stdio.h>
 
 extern PLAYER_DATA player_data;
 
