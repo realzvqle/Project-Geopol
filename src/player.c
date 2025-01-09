@@ -21,6 +21,9 @@ void SetupPlayer(){
     player_data.nameshort = "Morkovia";
     player_data.health = 15;
     player_data.npcindex = 0;
+    player_data.canshoot = false;
+    player_data.weapon.init = false;
+    player_data.schedulefire = false;
 }
 
 static void DrawPlayer(){
