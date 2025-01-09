@@ -4,16 +4,16 @@
 #include "player.h"
 #include <stdio.h>
 
-char* namechoice[] = {"Consolan Republic", "Kingdom of Najidert", "Sovienian Union", 
-                        "Murri Revolutionary Forces", "Murican Empire", "Brotian State"};
+
+extern PLAYER_DATA player_data;
 char* namechoiceshort[] = {"Consola", "Najidert", "Sovienia", 
                             "Murri", "Murica", "Brotia"};
-
+char* namechoice[] = {"Consolan Republic", "Kingdom of Najidert", "Sovienian Union", 
+                        "Murri Revolutionary Forces", "Murican Empire", "Brotian State"};
 
 extern void NPCLogic(NPC* npc, FACTIONS* fac, int i, int j);
 FACTIONS faction[7];
 
-extern PLAYER_DATA player_data;
 
 Color GetRGB(FACTIONS* fac){
     if(fac->hostile == true){
@@ -38,8 +38,10 @@ void SetupFactions(){
             faction[i].moral_stance = 255;
             faction[i].money = 1200;
             faction[i].isPlayer = true;
+            faction[i].npcthere = 0;
+            faction[i].hostile = false;
         }
-        if(i == 1){
+        else if(i == 1){
             faction[i].name = "The Bandits";
             faction[i].nameshort = "Bandits";
             faction[i].moral_stance = 0;
@@ -56,10 +58,16 @@ void SetupFactions(){
 
         if(faction[i].moral_stance <= 30){
             faction[i].hostile = true;
+            if(faction[i].isPlayer) faction[i].hostile = false;
         }
         for(int j = 0; j < 10; j++){
-            if(faction[i].isPlayer == true) continue;
-            SetupNPC(&faction[i].npc[j], GetRGB(&faction[i]));
+            if(faction[i].isPlayer == true){
+                if(j >= 0){
+                    continue;
+                }
+                SetupPlayerNPC(&faction[0].npc[j], GetRGB(&faction[i]));
+            } 
+            else SetupNPC(&faction[i].npc[j], GetRGB(&faction[i]));
             faction[i].npc[j].isAlive = true;
             faction[i].npcthere++;
         }

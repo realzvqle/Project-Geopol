@@ -18,8 +18,7 @@ void SceneMGR(){
             break;     
         }
         case 1:{
-            if(init == false){
-                GpSetup();
+            if(init == false){  
                 SetupPlayer();
                 SetupFactions();
                 SetupCamera(&camera);
@@ -27,6 +26,7 @@ void SceneMGR(){
             }
             BeginDrawing();
             BeginMode2D(camera);
+        
             RenderFactionNPCs();
             PlayerLoop();
             ClearBackground(BLACK);

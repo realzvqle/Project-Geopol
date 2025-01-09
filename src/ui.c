@@ -1,5 +1,6 @@
 #include "ui.h"
 #include "exheaders/raylib.h"
+#include "npc.h"
 #include "player.h"
 #include "tools.h"
 #include <stdio.h>
@@ -41,6 +42,7 @@ void RenderLooseMenu(){
     GpDrawText("YOU LOST", 10, GetScreenHeight() / 2.0, 60, RED);
     ButtonState button = DrawButton("Restart", 10, GetScreenHeight() / 2.0 + 90, 400, 50, LIGHTGRAY, RED, GRAY, (int)NULL);
     if(button == BUTTON_CLICK_LEFT){
+        
         init = false;
         scene = 1;
     }

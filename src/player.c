@@ -20,13 +20,14 @@ void SetupPlayer(){
     player_data.name = "Morkovian Republic";
     player_data.nameshort = "Morkovia";
     player_data.health = 15;
-    player_data.npcindex = 1;
+    player_data.npcindex = 0;
 }
 
 static void DrawPlayer(){
     GpDrawText(player_data.nameshort, player_data.x, player_data.y - 60, 30, BLUE);
 
-    DrawCircle(player_data.x, player_data.y, PLAYER_SIZE, BLUE);
+    DrawCircle(player_data.x, player_data.y, PLAYER_SIZE, PURPLE);
+    DrawCircle(player_data.x, player_data.y, PLAYER_SIZE - 1, BLUE);
 }
 
 void PlayerLoop(){
@@ -88,12 +89,10 @@ void PlayerLoop(){
         }
     }
     if(IsKeyPressed(KEY_M)){
-        SetupNPC(&faction[0].npc[player_data.npcindex], BLUE);
-        //faction[0].npc[player_data.npcindex].isAlive = true;
-        player_data.npcindex++;
-        player_data.x = faction[0].npc[player_data.npcindex].x;
-        player_data.y = faction[0].npc[player_data.npcindex].y;
+        SetupPlayerNPC(&faction[0].npc[player_data.npcindex], GetRGB(&faction[0]));
+        faction[0].npcthere++;
         printf("made in, index = %d\n", player_data.npcindex);
+        player_data.npcindex++;
     }
     if(IsKeyPressed(KEY_P)){
         camera.zoom = 1;

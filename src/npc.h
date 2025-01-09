@@ -22,4 +22,7 @@ typedef struct _NPC {
 } NPC;
 
 void SetupNPC(NPC* npc, Color color);
+void SetupPlayerNPC(NPC* npc, Color color);
+void AllocateMemoryforNPC(NPC** npc);
+void FreeMemoryforNPC(NPC** npc);
 #endif
