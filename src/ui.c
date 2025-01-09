@@ -39,7 +39,7 @@ void RenderGamePlayerUI(){
 
 void RenderMainMenu(){
     if(menuinit == false){
-        int cmdSize = sizeof(splashmessage)/sizeof(splashmessage[0]);
+        int cmdSize = sizeof(splashmessage)/sizeof(splashmessage[0]) - 1;
         splash = splashmessage[GetRandomValue(0, cmdSize)];
         menuinit = true;
     }

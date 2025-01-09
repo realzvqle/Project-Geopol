@@ -63,7 +63,7 @@ void SetupFactions(){
             faction[i].hostile = true;
             if(faction[i].isPlayer) faction[i].hostile = false;
         }
-        for(int j = 0; j < 10; j++){
+        for(int j = 0; j < 70; j++){
             if(faction[i].isPlayer == true){
                 if(j >= 0){
                     continue;

@@ -11,8 +11,8 @@ extern PLAYER_DATA player_data;
 
 
 void SetupNPC(NPC* npc, Color color){
-    npc->x = (float)GetRandomValue(0, 5000);
-    npc->y = (float)GetRandomValue(0, 5000);
+    npc->x = (float)GetRandomValue(-5000, 5000);
+    npc->y = (float)GetRandomValue(-5000, 5000);
     npc->speeddebuf = GetRandomValue(100, 200);
     npc->color = color;
     npc->health = 15;
@@ -55,9 +55,11 @@ void NPCLogic(NPC* npc, FACTIONS* fac, int i, int j){
         }
     }
 SKIPWEAPONS:
-    DrawCircle(npc->x, npc->y, NPC_SIZE, GetRGB(fac));
-    if(fac->isPlayer == true) GpDrawText(player_data.nameshort, npc->x, npc->y - 60, 30, GetRGB(fac));
-    else GpDrawText(fac->nameshort, npc->x, npc->y - 60, 30, GetRGB(fac));
+    if(GpNPCIsInScreen(npc->x, npc->y)){
+        DrawCircle(npc->x, npc->y, NPC_SIZE, GetRGB(fac));
+        if(fac->isPlayer == true) GpDrawText(player_data.nameshort, npc->x, npc->y - 60, 30, GetRGB(fac));
+        else GpDrawText(fac->nameshort, npc->x, npc->y - 60, 30, GetRGB(fac));  
+    }
     
     if(fac->hostile == true){
         if(GpGetDistance(npc->x, player_data.x) < 400 && GpGetDistance(npc->y, player_data.y) < 400){

@@ -1,5 +1,6 @@
 #include "tools.h"
 #include "exheaders/raylib.h"
+#include "player.h"
 #include <stdbool.h>
 #include <stdio.h>
 #include <math.h>
@@ -7,9 +8,10 @@
 static Font font;
 
 extern Camera2D camera;
+extern PLAYER_DATA player_data;
 
 void GpSetup(){
-    font = LoadFontEx("resources/fonts/static/PixelifySans-Regular.ttf", 200, NULL, 0);
+    font = LoadFontEx("resources/fonts/PixelifySans/PixelifySans-Regular.ttf", 200, NULL, 0);
 }
 
 void GpClose(){
@@ -97,4 +99,9 @@ void GpDrawVersion(float posx, float posy, float size){
 
 Font GpGetFont(){
     return font;
+}
+
+bool GpNPCIsInScreen(float npcx, float npcy){ 
+    if(GpGetDistance(player_data.x, npcx) >= 500 && GpGetDistance(player_data.y, npcy) >= 300) return false;
+    else return true;
 }

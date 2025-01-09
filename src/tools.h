@@ -20,4 +20,5 @@ float GpGetMouseY();
 void GpDrawVersion(float posx, float posy, float size);
 float GpGetVersion();
 Font GpGetFont();
+bool GpNPCIsInScreen(float npcx, float npcy);
 #endif

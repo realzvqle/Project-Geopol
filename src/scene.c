@@ -30,7 +30,7 @@ void SceneMGR(){
             RenderFactionNPCs();
             PlayerLoop();
             ClearBackground(BLACK);
-            DrawRectangle(100, 100, 100, 100, RED);
+            //DrawRectangle(100, 100, 100, 100, RED);
             EndMode2D();
             RenderGamePlayerUI();
             EndDrawing();
