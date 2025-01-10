@@ -65,7 +65,6 @@ void RenderLooseMenu(){
     
     ButtonState button = DrawButton("Restart", 10, GetScreenHeight() / 2.0 + 90, 400, 50, LIGHTGRAY, RED, GRAY, (int)NULL);
     if(button == BUTTON_CLICK_LEFT){
-        
         init = false;
         scene = 1;
     }

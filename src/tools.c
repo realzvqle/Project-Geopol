@@ -102,6 +102,6 @@ Font GpGetFont(){
 }
 
 bool GpNPCIsInScreen(float npcx, float npcy){ 
-    if(GpGetDistance(player_data.x, npcx) >= 500 && GpGetDistance(player_data.y, npcy) >= 300) return false;
+    if(GpGetDistance(player_data.x, npcx) >= 400 && GpGetDistance(player_data.y, npcy) >= 300) return false;
     else return true;
 }

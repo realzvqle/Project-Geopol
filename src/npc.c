@@ -78,6 +78,7 @@ SKIPWEAPONS:
         else npc->canshoot = false;
     }
     if(player_data.targetselect != true) return;
+    if(GpNPCIsInScreen(npc->x, npc->y) == false) return;
     if(i == player_data.targetfacindex){
         if(j == player_data.targetnpcindex){
             DrawRectangleLines(npc->x - (NPC_SIZE + 10), 
