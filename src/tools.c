@@ -128,5 +128,5 @@ float GpGetDistanceAll(float x1, float y1, float x2, float y2) {
 bool GpNPCIsInScreen(float npcx, float npcy) {
     float distance = GpGetDistanceAll(player_data.x, player_data.y, npcx, npcy);
 
-    return distance <= 1000.0f; 
+    return distance <= 700.0f; 
 }

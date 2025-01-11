@@ -27,12 +27,15 @@ void SetupPlayer(){
 }
 
 static void DrawPlayer(){
+    Color lightwhite = {255, 255, 255, 70};
+    DrawCircle(player_data.x, player_data.y, 700, lightwhite);
     GpDrawText(player_data.nameshort, player_data.x, player_data.y - 60, 30, BLUE);
 
     DrawCircle(player_data.x, player_data.y, PLAYER_SIZE, PURPLE);
     //DrawCircleLines(player_data.x, player_data.y, 900, WHITE);
 
     DrawCircle(player_data.x, player_data.y, PLAYER_SIZE - 1, BLUE);
+    
 }
 
 void PlayerLoop(){
