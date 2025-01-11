@@ -7,10 +7,13 @@
 
 
 extern PLAYER_DATA player_data;
+extern FACTIONS faction[7];
 double currenttime;
 void SetupBases(BASE* base, Color color){
+CONTINUE:
     base->x = (float)GetRandomValue(-2000, 2000);
     base->y = (float)GetRandomValue(-3000, 3000);
+    
     base->color = color;
     base->health = 15;
     base->isAlive = true;

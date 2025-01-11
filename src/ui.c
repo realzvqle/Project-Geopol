@@ -37,8 +37,9 @@ void RenderGamePlayerUI(){
         
     // }
 }
-
+static float currenttime;
 void RenderMainMenu(){
+    currenttime = GetTime();
     if(menuinit == false){
         int cmdSize = sizeof(splashmessage)/sizeof(splashmessage[0]) - 1;
         splash = splashmessage[GetRandomValue(0, cmdSize)];
@@ -47,7 +48,10 @@ void RenderMainMenu(){
     static unsigned char i = 0;
     ClearBackground(BLACK);
     Color color = {i, i, i, 255};
-    i+=1;
+    if(currenttime - GetTime() <= 30 * GetFrameTime()){
+        i+=1;
+    }
+    
     if(i == UCHAR_MAX){
         i = 0;
     }
