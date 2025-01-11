@@ -29,6 +29,18 @@ void SceneMGR(){
         
             RenderFactionNPCs();
             PlayerLoop();
+            // Draw top border
+            DrawLine(MINMAPWIDTH, MINMAPHEIGHT, MAXMAPWIDTH, MINMAPHEIGHT, WHITE);
+
+            // Draw bottom border
+            DrawLine(MINMAPWIDTH, MAXMAPHEIGHT, MAXMAPWIDTH, MAXMAPHEIGHT, WHITE);
+
+            // Draw left border
+            DrawLine(MINMAPWIDTH, MINMAPHEIGHT, MINMAPWIDTH, MAXMAPHEIGHT, WHITE);
+
+            // Draw right border
+            DrawLine(MAXMAPWIDTH, MINMAPHEIGHT, MAXMAPWIDTH, MAXMAPHEIGHT, WHITE);
+
             ClearBackground(BLACK);
             //DrawRectangle(100, 100, 100, 100, RED);
             EndMode2D();

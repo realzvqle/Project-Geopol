@@ -36,6 +36,10 @@ void GpDrawXandY(float posX, float posY, float x, float y){
 }
 
 void GpFollow(float targetx, float targety, float* curx, float* cury, float speed){
+    if(*curx <= MINMAPWIDTH) *curx = MINMAPWIDTH;
+    if(*cury <= MINMAPHEIGHT) *cury = MINMAPHEIGHT;
+    if(*curx >= MAXMAPWIDTH) *curx = MAXMAPWIDTH;
+    if(*cury >= MAXMAPHEIGHT) *cury = MAXMAPHEIGHT;
     if (targetx < *curx) {
         *curx -= speed * GetFrameTime();
     } else if (targetx > *curx) {
@@ -50,6 +54,12 @@ void GpFollow(float targetx, float targety, float* curx, float* cury, float spee
 
 bool GpFollowStatus(float targetx, float targety, float* curx, float* cury, float speed){
     static bool finished = false;
+
+    if(*curx <= MINMAPWIDTH) *curx = MINMAPWIDTH;
+    if(*cury <= MINMAPHEIGHT) *cury = MINMAPHEIGHT;
+    if(*curx >= MAXMAPWIDTH) *curx = MAXMAPWIDTH;
+    if(*cury >= MAXMAPHEIGHT) *cury = MAXMAPHEIGHT;
+    
     if (targetx < *curx) {
         *curx -= speed * GetFrameTime();
     } else if (targetx > *curx) {
@@ -64,6 +74,10 @@ bool GpFollowStatus(float targetx, float targety, float* curx, float* cury, floa
     else return false;
 }
 void GpRunAway(float targetx, float targety, float* curx, float* cury, float speed){
+    if(*curx <= MINMAPWIDTH) *curx = MINMAPWIDTH;
+    if(*cury <= MINMAPHEIGHT) *cury = MINMAPHEIGHT;
+    if(*curx >= MAXMAPWIDTH) *curx = MAXMAPWIDTH;
+    if(*cury >= MAXMAPHEIGHT) *cury = MAXMAPHEIGHT;
     if (targetx > *curx) {
         *curx -= speed * GetFrameTime();
     } else if (targetx < *curx) {

@@ -13,6 +13,10 @@ extern PLAYER_DATA player_data;
 void SetupNPC(NPC* npc, FACTIONS* faction, Color color){
     npc->x = faction->base[0].x + (float)GetRandomValue(-800, 800);
     npc->y = faction->base[0].y + (float)GetRandomValue(-800, 800);
+    if(npc->x <= MINMAPWIDTH) npc->x = MINMAPWIDTH + GetRandomValue(0, 100);
+    if(npc->y <= MINMAPHEIGHT) npc->y = MINMAPHEIGHT + GetRandomValue(0, 100);
+    if(npc->x >= MAXMAPWIDTH) npc->x = MAXMAPWIDTH - GetRandomValue(0, 100);
+    if(npc->y >= MAXMAPHEIGHT) npc->y = MAXMAPHEIGHT - GetRandomValue(0, 100);
     npc->speeddebuf = GetRandomValue(100, 200);
     npc->color = color;
     npc->health = 15;

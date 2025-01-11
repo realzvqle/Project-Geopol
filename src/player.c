@@ -70,15 +70,27 @@ void PlayerLoop(){
     }
     if (IsKeyDown(KEY_W)) {
         player_data.y -= 600.0 * GetFrameTime();
+        if(player_data.y <= MINMAPHEIGHT){
+            player_data.y = MINMAPHEIGHT;
+        }
     }
     if (IsKeyDown(KEY_S)) {
         player_data.y += 600.0 * GetFrameTime();
+        if(player_data.y >= MAXMAPHEIGHT){
+            player_data.y = MAXMAPHEIGHT;
+        }
     }
     if (IsKeyDown(KEY_A)) {
         player_data.x -= 600.0 * GetFrameTime();
+        if(player_data.x <= MINMAPWIDTH){
+            player_data.x = MINMAPWIDTH;
+        }
     }
     if (IsKeyDown(KEY_D)) {
         player_data.x += 600.0 * GetFrameTime();
+        if(player_data.x >= MAXMAPWIDTH){
+            player_data.x = MAXMAPWIDTH;
+        }
     }
     if(IsKeyPressed(KEY_SPACE)){
         if(player_data.targetselect != true) return;

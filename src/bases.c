@@ -11,8 +11,8 @@ extern FACTIONS faction[7];
 double currenttime;
 void SetupBases(BASE* base, Color color){
 CONTINUE:
-    base->x = (float)GetRandomValue(-2000, 2000);
-    base->y = (float)GetRandomValue(-3000, 3000);
+    base->x = (float)GetRandomValue(MINMAPWIDTH, MAXMAPWIDTH);
+    base->y = (float)GetRandomValue(MINMAPHEIGHT, MAXMAPHEIGHT);
     
     base->color = color;
     base->health = 15;

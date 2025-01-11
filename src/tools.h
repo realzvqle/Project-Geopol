@@ -5,6 +5,10 @@
 
 #include "exheaders/raylib.h"
 
+#define MAXMAPHEIGHT 5000
+#define MAXMAPWIDTH 5000
+#define MINMAPHEIGHT -5000
+#define MINMAPWIDTH -5000
 
 
 void GpSetup();
