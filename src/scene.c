@@ -4,9 +4,9 @@
 #include "player.h"
 #include "tools.h"
 #include "ui.h"
-
 extern int scene;
 extern Camera2D camera;
+extern PLAYER_DATA player_data;
 bool init = false;
 
 void SceneMGR(){
@@ -31,6 +31,8 @@ void SceneMGR(){
             PlayerLoop();
             ClearBackground(BLACK);
             //DrawRectangle(100, 100, 100, 100, RED);
+            GpDrawXandY(10, 50, player_data.x, player_data.y);
+
             EndMode2D();
             RenderGamePlayerUI();
             EndDrawing();

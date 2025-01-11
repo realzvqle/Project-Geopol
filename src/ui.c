@@ -30,6 +30,7 @@ void RenderGamePlayerUI(){
     GpDrawText(buffer, GetScreenWidth() - 150, 10, 25, PINK);
     sprintf(buffer, "Money: %d", faction[0].money);
     GpDrawText(buffer, GetScreenWidth() - 150, 30, 25, PINK);
+    GpDrawXandY(10, 50, player_data.x, player_data.y);
     // if(IsKeyPressed(KEY_F)){
     //     if(!IsWindowFullscreen()) ToggleFullscreen();
     //     else MinimizeWindow();

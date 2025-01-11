@@ -10,9 +10,9 @@
 extern PLAYER_DATA player_data;
 
 
-void SetupNPC(NPC* npc, Color color){
-    npc->x = (float)GetRandomValue(-5000, 5000);
-    npc->y = (float)GetRandomValue(-5000, 5000);
+void SetupNPC(NPC* npc, FACTIONS* faction, Color color){
+    npc->x = faction->base[0].x + (float)GetRandomValue(-800, 800);
+    npc->y = faction->base[0].y + (float)GetRandomValue(-800, 800);
     npc->speeddebuf = GetRandomValue(100, 200);
     npc->color = color;
     npc->health = 15;

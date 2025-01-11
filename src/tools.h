@@ -21,4 +21,6 @@ void GpDrawVersion(float posx, float posy, float size);
 float GpGetVersion();
 Font GpGetFont();
 bool GpNPCIsInScreen(float npcx, float npcy);
+float GpGetDistanceAll(float x1, float y1, float x2, float y2);
+void GpDrawXandY(float posX, float posY, float x, float y);
 #endif

@@ -4,6 +4,7 @@
 
 
 
+#include "bases.h"
 #include "tools.h"
 #include "npc.h"
 #include <stdint.h>
@@ -18,6 +19,8 @@ typedef struct _FACTIONS{
     bool lostaplayer;
     uint16_t npcthere;
     NPC npc[512];
+    uint16_t basethere;
+    BASE base[30];
 } FACTIONS;
 
 void SetupFactions();

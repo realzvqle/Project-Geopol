@@ -29,6 +29,12 @@ void GpDrawFPS(float posX, float posY){
     GpDrawText(buffer, posX, posY, 25,  GREEN);
 }
 
+void GpDrawXandY(float posX, float posY, float x, float y){
+    char buffer[512];
+    sprintf(buffer, "X: %0.2f\nY:%0.2f\n",x, y);;
+    GpDrawText(buffer, posX, posY, 25,  PURPLE);
+}
+
 void GpFollow(float targetx, float targety, float* curx, float* cury, float speed){
     if (targetx < *curx) {
         *curx -= speed * GetFrameTime();
@@ -101,7 +107,12 @@ Font GpGetFont(){
     return font;
 }
 
-bool GpNPCIsInScreen(float npcx, float npcy){ 
-    if(GpGetDistance(player_data.x, npcx) >= 400 && GpGetDistance(player_data.y, npcy) >= 300) return false;
-    else return true;
+float GpGetDistanceAll(float x1, float y1, float x2, float y2) {
+    return sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
+}
+
+bool GpNPCIsInScreen(float npcx, float npcy) {
+    float distance = GpGetDistanceAll(player_data.x, player_data.y, npcx, npcy);
+
+    return distance <= 1000.0f; 
 }

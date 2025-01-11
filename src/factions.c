@@ -1,4 +1,5 @@
 #include "factions.h"
+#include "bases.h"
 #include "exheaders/raylib.h"
 #include "npc.h"
 #include "player.h"
@@ -12,6 +13,8 @@ char* namechoice[] = {"Consolan Republic", "Kingdom of Najidert", "Sovienian Uni
                         "Murri Revolutionary Forces", "Murican Empire", "Brotian State"};
 
 extern void NPCLogic(NPC* npc, FACTIONS* fac, int i, int j);
+extern void BaseLogic(BASE* base, FACTIONS* faction);
+extern void SetupNPC(NPC* npc, FACTIONS* faction, Color color);
 FACTIONS faction[7];
 
 
@@ -38,7 +41,7 @@ void SetupFactions(){
         if(i == 0){
             faction[i].name = player_data.name;
             faction[i].nameshort = player_data.nameshort;
-            faction[i].moral_stance = 255;
+            faction[i].moral_stance = 126;
             faction[i].money = 1200;
             faction[i].isPlayer = true;
             faction[i].npcthere = 0;
@@ -50,7 +53,6 @@ void SetupFactions(){
             faction[i].moral_stance = 0;
             faction[i].money = 1200;
             faction[i].hostile = true;
-
         }
         else {
             faction[i].name = namechoice[i - 2];
@@ -59,21 +61,38 @@ void SetupFactions(){
             faction[i].money = 1200;
         }
 
-        if(faction[i].moral_stance <= 30){
-            faction[i].hostile = true;
-            if(faction[i].isPlayer) faction[i].hostile = false;
+        if(faction[i].moral_stance - faction[0].moral_stance >= 120){
+            if(i != 0){
+                faction[i].hostile = true;
+                //if(faction[i].isPlayer) faction[i].hostile = false;
+            } 
         }
-        for(int j = 0; j < 70; j++){
+        for(int j = 0; j < 1; j++){
+            if(faction[i].isPlayer == true){
+                if(j >= 1){
+                    continue;
+                }
+                SetupBases(&faction[0].base[j], GetRGB(&faction[i]));
+                player_data.x = faction[0].base[j].x + 400;
+                player_data.y = faction[0].base[j].y + 400;
+            } 
+            else SetupBases(&faction[i].base[j], GetRGB(&faction[i]));
+            faction[i].base[j].isAlive = true;
+            faction[i].basethere++;
+        }
+
+        for(int j = 0; j < 10; j++){
             if(faction[i].isPlayer == true){
                 if(j >= 0){
                     continue;
                 }
                 SetupPlayerNPC(&faction[0].npc[j], GetRGB(&faction[i]));
             } 
-            else SetupNPC(&faction[i].npc[j], GetRGB(&faction[i]));
+            else SetupNPC(&faction[i].npc[j], &faction[i], GetRGB(&faction[i]));
             faction[i].npc[j].isAlive = true;
             faction[i].npcthere++;
         }
+        
     }
 }
 
@@ -93,16 +112,22 @@ void RenderFactionNPCs(){
         if(faction[i].lostaplayer == true){
             if((faction[i].money - 120) > 0){
                 faction[i].money -= 120;
-                SetupNPC(&faction[i].npc[GetFreeNPCSport(&faction[i])], GetRGB(&faction[i]));
+                SetupNPC(&faction[i].npc[GetFreeNPCSport(&faction[i])], &faction[i], GetRGB(&faction[i]));
                 printf("%s added a new buddy into their squadron, they have $%d left\n", faction[i].nameshort, faction[i].money);
 
             }
             faction[i].lostaplayer = false;
         }
+
         for(int j = 0; j < faction[i].npcthere; j++){
             if(faction[i].npc[j].isAlive == false) continue;
             NPCLogic(&faction[i].npc[j], &faction[i], i, j);
             PlayerNPCInteractions(&faction[i].npc[j], &faction[i], j, i);         
+        }
+        for(int j = 0; j < faction[i].basethere; j++){
+            faction[i].base[j].color = GetRGB(&faction[i]);
+            if(faction[i].base[j].isAlive == false) continue;
+            BaseLogic(&faction[i].base[j], &faction[i]);
         }
     }
 }
